@@ -147,11 +147,11 @@ public class extrairPDF extends javax.swing.JDialog {
                                 + ",'"+pa+"'"
                                 + ",'"+ razao +"'"
                                 + ",'"+ cnpj +"' "
-                                + ",'"+ valoracumulado +"' "
-                                + ",'"+ semret +"' "
-                                + ",'"+ retido +"' "
+                                + ",'"+ valoracumulado.replace(",", ".") +"' "
+                                + ",'"+ semret.replace(",", ".") +"' "
+                                + ",'"+ retido.replace(",", ".") +"' "
                                 + ",'"+ 0 +"' "
-                                + ",'"+ aliquota +"' "
+                                + ",'"+ aliquota.replace(",", ".") +"' "
                                  + ")");
                         System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                     }

@@ -6,6 +6,20 @@
 
 package br.com.jonatas.projetoSimplesNacional;
 
+import br.com.jonatas.Base.bd;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.File;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import utilitarios.mySql;
+
 /**
  *
  * @author issqn
@@ -32,9 +46,9 @@ public class FrameRelatorioPGDAS extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jTextField1 = new javax.swing.JTextField();
+        ano = new com.toedter.calendar.JYearChooser();
+        mes = new com.toedter.calendar.JMonthChooser();
+        cnpj = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -58,10 +72,10 @@ public class FrameRelatorioPGDAS extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1))
+                        .addComponent(ano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cnpj))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -69,19 +83,29 @@ public class FrameRelatorioPGDAS extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,6 +136,56 @@ public class FrameRelatorioPGDAS extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        bd b = new bd();
+        b.connect();
+        mySql f = new mySql(b.conn);
+        
+        Toolkit toolkit = Toolkit.getDefaultToolkit();    
+            Dimension screenSize = toolkit.getScreenSize();    
+
+            JDialog viewer = new JDialog(new javax.swing.JFrame(),"Impressão de Relatório", true);   
+            viewer.setSize(screenSize.width, screenSize.height);  
+            viewer.setLocationRelativeTo(null);
+            
+            
+
+
+            System.out.println(ano.getYear()+"0"+mes.getMonth()+1);
+
+            //mapa de dados
+            HashMap<String, Object> p = new HashMap<String, Object>();
+            p.put("PAEXIBIR", ((mes.getMonth()+1)<10?"0"+(mes.getMonth()+1):(mes.getMonth()+1))+"/"+ano.getYear());
+            p.put("PA", ano.getYear()+""+((mes.getMonth()+1)<10?"0"+(mes.getMonth()+1):(mes.getMonth()+1)));
+            p.put("CNPJ", cnpj.getText());
+            
+
+            //JasperPrint jp = null;
+            //exibe relatorio
+            JasperPrint jp = null;
+            try {
+                if (cnpj.getText().equals(""))
+                    jp = JasperFillManager.fillReport("relatorios"+File.separator+"arquivoPGDAS.jasper",p, b.conn);
+                else
+                    jp = JasperFillManager.fillReport("relatorios"+File.separator+"arquivoPGDASporPACNPJ.jasper",p, b.conn);
+            } catch (JRException ex) {
+                Logger.getLogger(FrameRelatorioPGDAS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            /*if (cnpj.getText().equals(""))
+                JasperPrint jp = Jaspe
+            else
+                JasperPrint jp = JasperFillManager.fillReport("relatorios"+File.separator+"arquivoPGDAS.jasper", p, b.conn);*/
+            JasperViewer jrv = new JasperViewer(jp, false);
+            viewer.getContentPane().add(jrv.getContentPane());   
+            viewer.setVisible(true); 
+            b.disconnect();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,13 +230,13 @@ public class FrameRelatorioPGDAS extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JYearChooser ano;
+    private javax.swing.JTextField cnpj;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private com.toedter.calendar.JMonthChooser mes;
     // End of variables declaration//GEN-END:variables
 }

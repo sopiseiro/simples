@@ -1,19 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processamentoPGDASxDadosContribuinteTodos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ac3cf8f-5dac-4076-8c0d-725ea8e4c1e3">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processamentoPGDASxDadosContribuinteTodos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ac3cf8f-5dac-4076-8c0d-725ea8e4c1e3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+	PGDAS.PA, PGDAS.RAZAO, PGDAS.CNPJ, PGDAS.VALORPA, PGDAS.VALDECSEMRETENCAO, PGDAS.VALDECCOMRETENCAO, PGDAS.ALIQUOTA,
+	DADOSCONTRIBUINTE.PA, DADOSCONTRIBUINTE.CNPJ, DADOSCONTRIBUINTE.VALORRETIDO, DADOSCONTRIBUINTE.VALORSEMRETENCAO,
+	SUM(DADOSCONTRIBUINTE.VALORSEMRETENCAO - PGDAS.VALDECSEMRETENCAO) AS DIFERENCASEMRETENCAO,
+	SUM(DADOSCONTRIBUINTE.VALORRETIDO - PGDAS.VALDECCOMRETENCAO) AS DIFERENCACOMRETENCAO
+FROM PGDAS, DADOSCONTRIBUINTE
+WHERE
+	PGDAS.PA = DADOSCONTRIBUINTE.PA AND
+	PGDAS.CNPJ = DADOSCONTRIBUINTE.CNPJ
+
+GROUP BY PGDAS.CNPJ
+ORDER BY PGDAS.PA]]>
+	</queryString>
+	<field name="pa" class="java.lang.Object"/>
+	<field name="razao" class="java.lang.Object"/>
+	<field name="cnpj" class="java.lang.Object"/>
+	<field name="valorpa" class="java.lang.Object"/>
+	<field name="valdecsemretencao" class="java.lang.Object"/>
+	<field name="valdeccomretencao" class="java.lang.Object"/>
+	<field name="aliquota" class="java.lang.Object"/>
+	<field name="valorretido" class="java.lang.Object"/>
+	<field name="valorsemretencao" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch"/>
 	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="48" width="100" height="20" uuid="ba011f45-453e-4d4f-b1fd-66a367cf9e40"/>
+				<text><![CDATA[PGDAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="69" width="100" height="20" uuid="0e680110-74b9-419c-977e-3e15de887d7e"/>
+				<text><![CDATA[NFS-e]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="90" width="100" height="20" uuid="37c1b30f-bfc5-4341-9460-a11d7dac7487"/>
+				<text><![CDATA[Diferenca]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="121" y="69" width="100" height="20" uuid="24376b6e-bd6e-44bf-87ae-0a672792e24e"/>
+				<textFieldExpression><![CDATA[""+$F{valorsemretencao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="68" width="100" height="20" uuid="0a32debf-7104-43b1-9996-ee5516aed670"/>
+				<textFieldExpression><![CDATA[""+$F{valorretido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ #,##0.00;">
+				<reportElement x="121" y="45" width="100" height="20" uuid="de206412-c136-475f-adbf-84dd2e674c8f"/>
+				<textFieldExpression><![CDATA[""+$F{valdecsemretencao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="239" y="45" width="100" height="20" uuid="2bd2eb51-8aae-4be5-8b1f-da39f2caf3e9"/>
+				<textFieldExpression><![CDATA[""+$F{valdeccomretencao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="3b1b3b42-b708-43e7-a102-021126388a17"/>
+				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement x="453" y="0" width="100" height="20" uuid="22b00492-ee51-41d3-b245-c81cf2ff2924"/>
+				<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="23" width="100" height="20" uuid="02a9e76c-69dc-4657-8f4d-60d0c638e256"/>
+				<text><![CDATA[Com retencao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="22" width="100" height="20" uuid="94dd872b-f7d6-486b-9a64-0e3d96ff1f8a"/>
+				<text><![CDATA[Sem retencao]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="1" width="227" height="20" uuid="e65b7de1-8ecd-4fe1-b3f1-374e62c9f761"/>
+				<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

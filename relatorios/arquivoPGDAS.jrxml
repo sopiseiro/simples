@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="arquivoPGDAS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f1a1118-245e-4c60-a8e4-ee174a13f693">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CNPJ" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PAEXIBIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM PGDAS WHERE PA = $P{PA}]]>
+	</queryString>
+	<field name="id" class="java.lang.Object"/>
+	<field name="pa" class="java.lang.Object"/>
+	<field name="razao" class="java.lang.Object"/>
+	<field name="cnpj" class="java.lang.Object"/>
+	<field name="valorpa" class="java.lang.Object"/>
+	<field name="valdecsemretencao" class="java.lang.Object"/>
+	<field name="valdeccomretencao" class="java.lang.Object"/>
+	<field name="valorrecoiss" class="java.lang.Object"/>
+	<field name="aliquota" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="-1" width="554" height="90" uuid="23c623b8-9ea3-400c-b295-78d360c77270"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="22" width="551" height="20" uuid="5f7efc41-9de5-4c0f-9e4a-58ff312b498c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Informações PGDAS-D]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="3" y="42" width="550" height="20" uuid="6639ca28-a3e9-4827-94aa-9502730f8668"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Gerado em "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="2" width="551" height="20" backcolor="#464646" uuid="ecaa18c8-632b-4671-a2e1-c923988ff769"/>
+			</rectangle>
+			<textField>
+				<reportElement x="136" y="3" width="100" height="20" forecolor="#FFF5F5" uuid="817992d8-9146-4cab-94b5-326bb6b2c98d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$P{PAEXIBIR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="3" width="131" height="20" forecolor="#FFF5F5" uuid="41d88d7e-b229-4e14-b008-71b3a4241d78"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo de Apuração:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="0" width="100" height="20" uuid="e6948824-6cf9-4e1d-959e-8c8bdf908ea1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="1" width="62" height="20" uuid="f6c49008-9035-4806-a9f6-6a0bb721d67d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Sem retenção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="2" width="72" height="20" uuid="d2805229-82c1-4893-a370-5e134c695082"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Com retenção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="496" y="0" width="58" height="20" uuid="a51e1a9b-bdb5-4587-aced-59d84a4c32b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Aliquota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="1" width="216" height="20" uuid="664c09ab-9387-448d-aaa2-49a0f6c09e37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Razão Social]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="1" width="551" height="20" forecolor="#EEEAEA" backcolor="#EEEAEA" uuid="beca674f-1233-4914-8e16-d25226a6e401">
+					<printWhenExpression><![CDATA[new Boolean(($V{REPORT_COUNT}.intValue()%2!=0))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField pattern="">
+				<reportElement x="4" y="2" width="100" height="20" uuid="9659d086-8df4-4b76-9052-7f5855251400"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="2" width="246" height="20" uuid="c6b97a2d-91c1-4646-8c5d-264da8b5cf0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="354" y="2" width="65" height="20" uuid="ba9881fc-de3d-4752-a121-aa0eeaeddcd8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{valdecsemretencao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="420" y="1" width="70" height="20" uuid="8ddd2ff2-6937-455f-8610-08e497e9adec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{valdeccomretencao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="496" y="0" width="57" height="20" uuid="473e64f6-f6a9-4ec9-af89-f8564febea6d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement x="430" y="7" width="80" height="20" uuid="731d2306-6164-406a-bec7-a66a2f0de810"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="7" width="40" height="20" uuid="ac533c8f-a858-4b73-927c-815a8c8378b7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="8" width="180" height="20" uuid="1862f5cc-ee2b-419b-91d3-21d4b8467a4a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Desenvolvido por Jônatas Cardoso]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
