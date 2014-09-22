@@ -124,6 +124,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem6);
 
         jMenuItem9.setText("Dados Fiscais - Contribuinte");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
@@ -354,6 +359,13 @@ public class FramePrincipal extends javax.swing.JFrame {
         }*/
         //return arquivos;
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        FrameDadosContribuinte j = new FrameDadosContribuinte(this, rootPaneCheckingEnabled);
+        j.setVisible(true);
+        j.setTitle("Importação de arquivo Dados Contribuinte");
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

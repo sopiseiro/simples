@@ -96,7 +96,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             }
 
             leituraTxt txt = new leituraTxt(selFile);
-            v = txt.leituraTxtPGDAS();
+            v = txt.leituraTxt();
             boolean captura = false;
             boolean ente = false;
             
