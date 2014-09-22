@@ -114,7 +114,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem4);
 
-        jMenuItem6.setText("Extrair");
+        jMenuItem6.setText("PGDAS");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -127,6 +127,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenu6.setText("Relatórios");
 
         jMenuItem8.setText("Arquivo PGDAS");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem8);
 
         jMenuBar1.add(jMenu6);
@@ -335,6 +340,16 @@ public class FramePrincipal extends javax.swing.JFrame {
             e.printStackTrace();
         }*/
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+            FrameRelatorioPGDAS j = new FrameRelatorioPGDAS(this, rootPaneCheckingEnabled);
+            //j.setDadosVetor(txt.leituraTxt(), fc);
+            //j.setTable();
+            //j.print();
+            j.setVisible(true);
+            j.setTitle("Relatórios Importação PGDAS");
+            j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ImportPGDAS" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be84eca9-70f6-43e9-93c4-22dc499fcbfe">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM PGDAS]]>
+	</queryString>
+	<field name="id" class="java.lang.Object"/>
+	<field name="pa" class="java.lang.Object"/>
+	<field name="razao" class="java.lang.Object"/>
+	<field name="cnpj" class="java.lang.Object"/>
+	<field name="valorpa" class="java.lang.Object"/>
+	<field name="valdecsemretencao" class="java.lang.Object"/>
+	<field name="valdeccomretencao" class="java.lang.Object"/>
+	<field name="valorrecoiss" class="java.lang.Object"/>
+	<field name="aliquota" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="39" width="100" height="20" uuid="7c692436-8c5b-4de7-87ca-7616b31f419d"/>
+				<textFieldExpression><![CDATA[""+$F{pa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="106" y="1" width="100" height="20" uuid="15c2e83d-c6da-46aa-b96f-a0d25581e56f"/>
+				<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="4" y="1" width="100" height="20" uuid="29d7138a-295d-4482-a041-a50a476efa2d"/>
+				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="1" width="82" height="20" uuid="2c890944-c76d-46d4-9ce3-247bbdbea8db"/>
+				<textFieldExpression><![CDATA[""+$F{valorpa}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="512" y="2" width="42" height="20" uuid="092e684d-e20d-4d95-b17b-add50ef31dc2"/>
+				<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="292" y="2" width="100" height="20" uuid="6edc32e7-1ee8-4093-a067-cc50bc13edb1"/>
+				<textFieldExpression><![CDATA[""+$F{valdecsemretencao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="401" y="2" width="100" height="20" uuid="610edc50-cbf2-4fff-af2b-504d5ec02171"/>
+				<textFieldExpression><![CDATA[""+$F{valdeccomretencao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

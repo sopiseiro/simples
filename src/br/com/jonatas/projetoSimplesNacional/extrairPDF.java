@@ -28,6 +28,7 @@ public class extrairPDF extends javax.swing.JDialog {
     String cnpj, pa, razao,valoracumulado; 
     String retido = "";
     String semret = "";
+    String aliquota = "";
     /**
      * Creates new form extrairPDF
      */
@@ -133,6 +134,10 @@ public class extrairPDF extends javax.swing.JDialog {
                         retido = v.get(i).split("\\|")[2];
                     }
                 }
+                
+                if (v.get(i).substring(0,5).equals("03110") && aliquota.equals("")){
+                     aliquota = v.get(i).split("\\|")[26];
+                }
                
                 
                 if (v.get(i).substring(0,5).equals("99999")){
@@ -146,13 +151,14 @@ public class extrairPDF extends javax.swing.JDialog {
                                 + ",'"+ semret +"' "
                                 + ",'"+ retido +"' "
                                 + ",'"+ 0 +"' "
-                                + ",'"+ 0 +"' "
+                                + ",'"+ aliquota +"' "
                                  + ")");
-                        System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido);
+                        System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                     }
                     ente = false;
                     semret = "";
                     retido = "";
+                    aliquota = "";
                 }
                 
             }
