@@ -51,6 +51,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -122,6 +123,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem6);
 
+        jMenuItem9.setText("Dados Fiscais - Contribuinte");
+        jMenu3.add(jMenuItem9);
+
         jMenuBar1.add(jMenu3);
 
         jMenu6.setText("Relatórios");
@@ -166,144 +170,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-                File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Escolha o arquivo Eventos Simples");
-        fc.setDialogType(JFileChooser.OPEN_DIALOG);
-        fc.setApproveButtonText("Selecionar");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setMultiSelectionEnabled(false);
-        int resultado = fc.showOpenDialog(fc);
-        if (resultado == JFileChooser.CANCEL_OPTION){
-            return;
-        }
-        //arquivos = fc.getSelectedFiles();
-        System.out.println(fc.getSelectedFile());
-        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
-        try{
-            FrameEventoSimples j = new FrameEventoSimples(this, rootPaneCheckingEnabled);
-            j.setDadosVetor(txt.leituraTxt(), fc);
-            j.setTable();
-            j.print();
-            j.setVisible(true);
-            j.setTitle("Importação de arquivo Eventos do Simples Nacional");
-            j.setLocationRelativeTo(null);
-            //txt.leituraTxt();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        /*for(File f : arquivos){
-            System.out.println("NOME: " + f.getName());
-        }*/
-        //return arquivos;
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Escolha o arquivo Eventos do Periodo Simples");
-        fc.setDialogType(JFileChooser.OPEN_DIALOG);
-        fc.setApproveButtonText("Selecionar");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setMultiSelectionEnabled(false);
-        int resultado = fc.showOpenDialog(fc);
-        if (resultado == JFileChooser.CANCEL_OPTION){
-            return;
-        }
-        //arquivos = fc.getSelectedFiles();
-        System.out.println(fc.getSelectedFile());
-        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
-        try{
-            FramePeriodoSimples j = new FramePeriodoSimples(this, rootPaneCheckingEnabled);
-            j.setDadosVetor(txt.leituraTxt(), fc);
-            j.setTable();
-            j.print();
-            j.setVisible(true);
-            j.setTitle("Importação de arquivo Periodo do Simples Nacional");
-            j.setLocationRelativeTo(null);
-            //txt.leituraTxt();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        /*for(File f : arquivos){
-            System.out.println("NOME: " + f.getName());
-        }*/
-        //return arquivos;
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Escolha o arquivo Eventos SIMEI");
-        fc.setDialogType(JFileChooser.OPEN_DIALOG);
-        fc.setApproveButtonText("Selecionar");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setMultiSelectionEnabled(false);
-        int resultado = fc.showOpenDialog(fc);
-        if (resultado == JFileChooser.CANCEL_OPTION){
-            return;
-        }
-        //arquivos = fc.getSelectedFiles();
-        System.out.println(fc.getSelectedFile());
-        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
-        try{
-            FrameEventoSimei j = new FrameEventoSimei(this, rootPaneCheckingEnabled);
-            j.setDadosVetor(txt.leituraTxt(), fc);
-            j.setTable();
-            j.print();
-            j.setVisible(true);
-            j.setTitle("Importação de arquivo EVEMEI");
-            j.setLocationRelativeTo(null);
-            //txt.leituraTxt();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Escolha o arquivo Periodo do SIMEI");
-        fc.setDialogType(JFileChooser.OPEN_DIALOG);
-        fc.setApproveButtonText("Selecionar");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setMultiSelectionEnabled(false);
-        int resultado = fc.showOpenDialog(fc);
-        if (resultado == JFileChooser.CANCEL_OPTION){
-            return;
-        }
-        //arquivos = fc.getSelectedFiles();
-        System.out.println(fc.getSelectedFile());
-        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
-        try{
-            FramePeriodoSimei j = new FramePeriodoSimei(this, rootPaneCheckingEnabled);
-            j.setDadosVetor(txt.leituraTxt(), fc);
-            j.setTable();
-            j.print();
-            j.setVisible(true);
-            j.setTitle("Importação de arquivo PERMEI");
-            j.setLocationRelativeTo(null);
-            //txt.leituraTxt();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-            extrairPDF j = new extrairPDF(this, rootPaneCheckingEnabled);
-            //j.setDadosVetor(txt.leituraTxt(), fc);
-            //j.setTable();
-            //j.print();
-            j.setVisible(true);
-            j.setTitle("Importação de arquivo PERMEI");
-            j.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         File[] arquivos  = null;
@@ -350,6 +219,141 @@ public class FramePrincipal extends javax.swing.JFrame {
             j.setTitle("Relatórios Importação PGDAS");
             j.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        extrairPDF j = new extrairPDF(this, rootPaneCheckingEnabled);
+        //j.setDadosVetor(txt.leituraTxt(), fc);
+        //j.setTable();
+        //j.print();
+        j.setVisible(true);
+        j.setTitle("Importação de arquivo PERMEI");
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        File[] arquivos  = null;
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Escolha o arquivo Periodo do SIMEI");
+        fc.setDialogType(JFileChooser.OPEN_DIALOG);
+        fc.setApproveButtonText("Selecionar");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        int resultado = fc.showOpenDialog(fc);
+        if (resultado == JFileChooser.CANCEL_OPTION){
+            return;
+        }
+        //arquivos = fc.getSelectedFiles();
+        System.out.println(fc.getSelectedFile());
+        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
+        try{
+            FramePeriodoSimei j = new FramePeriodoSimei(this, rootPaneCheckingEnabled);
+            j.setDadosVetor(txt.leituraTxt(), fc);
+            j.setTable();
+            j.print();
+            j.setVisible(true);
+            j.setTitle("Importação de arquivo PERMEI");
+            j.setLocationRelativeTo(null);
+            //txt.leituraTxt();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        File[] arquivos  = null;
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Escolha o arquivo Eventos do Periodo Simples");
+        fc.setDialogType(JFileChooser.OPEN_DIALOG);
+        fc.setApproveButtonText("Selecionar");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        int resultado = fc.showOpenDialog(fc);
+        if (resultado == JFileChooser.CANCEL_OPTION){
+            return;
+        }
+        //arquivos = fc.getSelectedFiles();
+        System.out.println(fc.getSelectedFile());
+        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
+        try{
+            FramePeriodoSimples j = new FramePeriodoSimples(this, rootPaneCheckingEnabled);
+            j.setDadosVetor(txt.leituraTxt(), fc);
+            j.setTable();
+            j.print();
+            j.setVisible(true);
+            j.setTitle("Importação de arquivo Periodo do Simples Nacional");
+            j.setLocationRelativeTo(null);
+            //txt.leituraTxt();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        /*for(File f : arquivos){
+            System.out.println("NOME: " + f.getName());
+        }*/
+        //return arquivos;
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        File[] arquivos  = null;
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Escolha o arquivo Eventos SIMEI");
+        fc.setDialogType(JFileChooser.OPEN_DIALOG);
+        fc.setApproveButtonText("Selecionar");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        int resultado = fc.showOpenDialog(fc);
+        if (resultado == JFileChooser.CANCEL_OPTION){
+            return;
+        }
+        //arquivos = fc.getSelectedFiles();
+        System.out.println(fc.getSelectedFile());
+        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
+        try{
+            FrameEventoSimei j = new FrameEventoSimei(this, rootPaneCheckingEnabled);
+            j.setDadosVetor(txt.leituraTxt(), fc);
+            j.setTable();
+            j.print();
+            j.setVisible(true);
+            j.setTitle("Importação de arquivo EVEMEI");
+            j.setLocationRelativeTo(null);
+            //txt.leituraTxt();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        File[] arquivos  = null;
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Escolha o arquivo Eventos Simples");
+        fc.setDialogType(JFileChooser.OPEN_DIALOG);
+        fc.setApproveButtonText("Selecionar");
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        int resultado = fc.showOpenDialog(fc);
+        if (resultado == JFileChooser.CANCEL_OPTION){
+            return;
+        }
+        //arquivos = fc.getSelectedFiles();
+        System.out.println(fc.getSelectedFile());
+        leituraTxt txt = new leituraTxt(fc.getSelectedFile().toString());
+        try{
+            FrameEventoSimples j = new FrameEventoSimples(this, rootPaneCheckingEnabled);
+            j.setDadosVetor(txt.leituraTxt(), fc);
+            j.setTable();
+            j.print();
+            j.setVisible(true);
+            j.setTitle("Importação de arquivo Eventos do Simples Nacional");
+            j.setLocationRelativeTo(null);
+            //txt.leituraTxt();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        /*for(File f : arquivos){
+            System.out.println("NOME: " + f.getName());
+        }*/
+        //return arquivos;
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,6 +407,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
