@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import utilitarios.mySql;
 
 /**
@@ -99,6 +100,12 @@ public class extrairPDF extends javax.swing.JDialog {
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
+            
+            f.open("SELECT * FROM arqpgdas WHERE nome = '"+selFile.getName()+"'");
+            if (f.next()){
+               JOptionPane.showMessageDialog(this, "Arquivo já importado.");
+                return;
+            }
 
             leituraTxt txt = new leituraTxt(selFile);
             v = txt.leituraTxtPGDAS();
@@ -150,8 +157,8 @@ public class extrairPDF extends javax.swing.JDialog {
                 
             }
             
-            
-            f.execute("INSERT INTO arq-pgdas VALUES (null, " + selFile.getPath() +" )");
+            System.out.println(selFile.getName());
+            f.execute("INSERT INTO arqpgdas VALUES (null, '" + selFile.getName() +"', 0 , 0, 0 )");
             
           // reader = new PdfReader("" + selFile);
             // contador para o numeros de paginas
