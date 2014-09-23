@@ -13,6 +13,7 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -152,6 +153,7 @@ public class extrairPDF extends javax.swing.JDialog {
                                 + ",'"+ retido.replace(",", ".") +"' "
                                 + ",'"+ 0 +"' "
                                 + ",'"+ aliquota.replace(",", ".") +"' "
+                                + ",'"+ selFile.getName().split("-")[4]+"' "
                                  + ")");
                         System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                     }

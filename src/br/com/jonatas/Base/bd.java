@@ -17,8 +17,8 @@ public class bd {
     public void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            System.out.println("jdbc:sqlite:"+ System.getProperty("user.dir") + File.separator+"base"+File.separator+"datasn.sqlite");
-            conn = DriverManager.getConnection("jdbc:sqlite:"+ System.getProperty("user.dir") + File.separator +"base"+File.separator+"datasn.sqlite");
+            //System.out.println("jdbc:sqlite:"+ System.getProperty("user.dir") + File.separator+"base"+File.separator+"datasimples.sqlite");
+            conn = DriverManager.getConnection("jdbc:sqlite:"+ System.getProperty("user.dir") + File.separator +"base"+File.separator+"datasimples.sqlite");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel conectar com o banco de dados. Verifique se o servidor está ativo!");
             System.exit(0);
