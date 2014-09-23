@@ -1,0 +1,30 @@
+CREATE TABLE pgdas (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "pa" TEXT,
+    "razao" TEXT,
+    "cnpj" TEXT,
+    "valorpa" FLOAT,
+    "valdecsemretencao" FLOAT,
+    "valdeccomretencao" FLOAT,
+    "valorrecoiss" FLOAT,
+    "aliquota" FLOAT
+, "data" TEXT)
+
+CREATE TABLE "arqdadoscontribuinte" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT,
+    "data" TEXT
+)
+
+CREATE TABLE "arqpgdas" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "nome" TEXT, "data" DATETIME, "aux" TEXT, "aux2" TEXT)
+
+CREATE TABLE "codEventosSimples" ("id" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , "descricao" TEXT check(typeof("descricao") = 'text') , "obs" TEXT check(typeof("obs") = 'text') )
+
+CREATE TABLE dadoscontribuinte (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "pa" TEXT,
+    "cnpj" TEXT,
+    "valorretido" REAL,
+    "valorsemretencao" REAL,
+    "aliquota" REAL
+)
