@@ -76,6 +76,8 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
         List<String> v = new ArrayList<String>();
 
         String pa = "201408";//lembrar de add campo para informação
+        String aliquota[]={"2.79","3.50","3.84","3.87","4.23","4.26","4.31","4.61","4.65","5.00"};
+
         
         
         bd b = new bd();
@@ -104,9 +106,9 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
                 f.execute("INSERT INTO dadoscontribuinte VALUES (null "
                                 + ",'"+pa+"'" //pa
                                 + ",'"+ v.get(i).split("\\|")[0]+"'"//cnpj
-                                + ",'"+ v.get(i).split("\\|")[1] +"' " //valor retido
-                                + ",'"+ v.get(i).split("\\|")[2] +"' " //valor sem retencao
-                                + ",'"+ v.get(i).split("\\|")[3] +"' " //aliquota
+                                + ",'"+ v.get(i).split("\\|")[2] +"' " //valor retido
+                                + ",'"+ v.get(i).split("\\|")[1] +"' " //valor sem retencao
+          + ",'"+ (v.get(i).split("\\|")[3].equals("null")?"2":aliquota[Integer.parseInt(v.get(i).split("\\|")[3])]) +"' " //aliquota
                                  + ")");
                 
                 //System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
@@ -117,6 +119,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             
             System.out.println(selFile.getName());
             f.execute("INSERT INTO arqdadoscontribuinte VALUES (null, '" + selFile.getName() +"', 0 )");
+            b.disconnect();
             
           // reader = new PdfReader("" + selFile);
             // contador para o numeros de paginas
@@ -130,6 +133,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
 
            } catch (IOException e1) {
                 e1.printStackTrace();
+                b.disconnect();
                 //JOptionPane.showMessageDialog(null, "ERRO: " + e1);
             }
                 

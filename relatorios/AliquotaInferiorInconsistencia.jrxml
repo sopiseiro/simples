@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AliquotaInferiorInconsistencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb7591f6-8180-44ef-a86b-c6eb3ced9a2a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PAEXIBIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+	PGDAS.CNPJ, PGDAS.ALIQUOTA, PGDAS.RAZAO
+FROM PGDAS, DADOSCONTRIBUINTE
+WHERE
+     PGDAS.PA = $P{PA} AND
+     DADOSCONTRIBUINTE.PA = PGDAS.PA AND
+     DADOSCONTRIBUINTE.CNPJ = PGDAS.CNPJ AND
+     DADOSCONTRIBUINTE.ALIQUOTA < PGDAS.ALIQUOTA
+ORDER BY PGDAS.RAZAO ASC]]>
+	</queryString>
+	<field name="cnpj" class="java.lang.Object"/>
+	<field name="aliquota" class="java.lang.Object"/>
+	<field name="razao" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="2" width="100" height="20" uuid="2fda7bf8-aa9a-4f96-87e8-c05fc8c44402"/>
+				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="3" width="342" height="20" uuid="01b0d0cd-8f48-46e4-987f-b25c0ff07b88"/>
+				<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="1" width="100" height="20" uuid="b091afb0-f9f9-4f2b-a34d-40ca6dbf6844"/>
+				<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
