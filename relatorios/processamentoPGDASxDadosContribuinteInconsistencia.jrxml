@@ -36,25 +36,43 @@ ORDER BY PGDAS.RAZAO]]>
 	<group name="CNPJ">
 		<groupExpression><![CDATA[$F{cnpj}]]></groupExpression>
 		<groupHeader>
-			<band height="46">
+			<band height="31">
+				<rectangle>
+					<reportElement x="1" y="2" width="552" height="25" backcolor="#464646" uuid="f51eeef7-f276-436c-891a-f7a9105c96f1"/>
+				</rectangle>
 				<textField>
-					<reportElement x="2" y="3" width="100" height="20" uuid="3b1b3b42-b708-43e7-a102-021126388a17"/>
+					<reportElement x="2" y="3" width="100" height="14" forecolor="#FCF5F5" uuid="3b1b3b42-b708-43e7-a102-021126388a17"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.000">
-					<reportElement x="455" y="2" width="100" height="20" uuid="22b00492-ee51-41d3-b245-c81cf2ff2924"/>
+					<reportElement x="455" y="2" width="100" height="14" forecolor="#FCF5F5" uuid="22b00492-ee51-41d3-b245-c81cf2ff2924"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="111" y="3" width="227" height="20" uuid="e65b7de1-8ecd-4fe1-b3f1-374e62c9f761"/>
+					<reportElement x="111" y="3" width="340" height="14" forecolor="#FCF5F5" uuid="e65b7de1-8ecd-4fe1-b3f1-374e62c9f761"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="124" y="25" width="100" height="20" uuid="94dd872b-f7d6-486b-9a64-0e3d96ff1f8a"/>
+					<reportElement x="122" y="16" width="100" height="14" forecolor="#FCF5F5" uuid="94dd872b-f7d6-486b-9a64-0e3d96ff1f8a"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Sem retenção]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="239" y="24" width="100" height="20" uuid="02a9e76c-69dc-4657-8f4d-60d0c638e256"/>
+					<reportElement x="237" y="15" width="100" height="14" forecolor="#FCF5F5" uuid="02a9e76c-69dc-4657-8f4d-60d0c638e256"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Com retenção]]></text>
 				</staticText>
 			</band>
@@ -70,50 +88,83 @@ ORDER BY PGDAS.RAZAO]]>
 		<band height="20">
 			<staticText>
 				<reportElement x="1" y="0" width="127" height="20" uuid="fed46a14-1313-4371-ab58-48984ca5bcf7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Periodo de Apuração:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="109" y="0" width="100" height="20" uuid="b09eefc4-2b0a-40f2-a7a0-0f480bc90f5d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{paexibir}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="68" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="4" width="100" height="20" uuid="ba011f45-453e-4d4f-b1fd-66a367cf9e40"/>
+				<reportElement x="2" y="0" width="100" height="14" uuid="ba011f45-453e-4d4f-b1fd-66a367cf9e40"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[PGDAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="25" width="100" height="20" uuid="0e680110-74b9-419c-977e-3e15de887d7e"/>
+				<reportElement x="2" y="16" width="100" height="14" uuid="0e680110-74b9-419c-977e-3e15de887d7e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[NFS-e]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="46" width="100" height="20" uuid="37c1b30f-bfc5-4341-9460-a11d7dac7487"/>
+				<reportElement x="2" y="31" width="100" height="14" uuid="37c1b30f-bfc5-4341-9460-a11d7dac7487"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Diferenca]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="121" y="25" width="100" height="20" uuid="24376b6e-bd6e-44bf-87ae-0a672792e24e"/>
+				<reportElement x="121" y="16" width="100" height="14" uuid="24376b6e-bd6e-44bf-87ae-0a672792e24e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valorsemretencao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="240" y="24" width="100" height="20" uuid="0a32debf-7104-43b1-9996-ee5516aed670"/>
+				<reportElement x="240" y="16" width="100" height="14" uuid="0a32debf-7104-43b1-9996-ee5516aed670"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valorretido}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="121" y="1" width="100" height="20" uuid="de206412-c136-475f-adbf-84dd2e674c8f"/>
+				<reportElement x="121" y="0" width="100" height="14" uuid="de206412-c136-475f-adbf-84dd2e674c8f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valdecsemretencao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="239" y="1" width="100" height="20" uuid="2bd2eb51-8aae-4be5-8b1f-da39f2caf3e9"/>
+				<reportElement x="239" y="0" width="100" height="14" uuid="2bd2eb51-8aae-4be5-8b1f-da39f2caf3e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valdeccomretencao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement x="121" y="46" width="100" height="20" uuid="6a270d6c-3389-4fdb-8fe5-a123fb545ca1"/>
+				<reportElement x="121" y="31" width="100" height="14" uuid="6a270d6c-3389-4fdb-8fe5-a123fb545ca1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{DIFERENCASEMRETENCAO}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="241" y="48" width="100" height="20" uuid="b21335c6-0ebb-4d4d-bdd5-0defcf78c953"/>
+				<reportElement x="241" y="31" width="100" height="14" uuid="b21335c6-0ebb-4d4d-bdd5-0defcf78c953"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""+$F{DIFERENCACOMRETENCAO}]]></textFieldExpression>
 			</textField>
 		</band>

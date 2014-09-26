@@ -11,7 +11,7 @@
 	</parameter>
 	<parameter name="PAEXIBIR" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM PGDAS WHERE PA = $P{PA}]]>
+		<![CDATA[SELECT * FROM PGDAS WHERE PA = $P{PA} ORDER BY RAZAO ASC]]>
 	</queryString>
 	<field name="id" class="java.lang.Object"/>
 	<field name="pa" class="java.lang.Object"/>
@@ -22,6 +22,7 @@
 	<field name="valdeccomretencao" class="java.lang.Object"/>
 	<field name="valorrecoiss" class="java.lang.Object"/>
 	<field name="aliquota" class="java.lang.Object"/>
+	<field name="data" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

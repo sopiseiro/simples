@@ -80,6 +80,7 @@ public class extrairPDF extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<String> v = new ArrayList<String>();
+        String codMunicipio = "8979";
         
         
         List<String> filtroISS = new ArrayList<String>();
@@ -98,7 +99,7 @@ public class extrairPDF extends javax.swing.JDialog {
 
         try {
             // Criação do FileChooser
-            JFileChooser file = new JFileChooser();
+            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/09-2014");
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
@@ -106,7 +107,8 @@ public class extrairPDF extends javax.swing.JDialog {
             f.open("SELECT * FROM arqpgdas WHERE nome = '"+selFile.getName()+"'");
             if (f.next()){
                JOptionPane.showMessageDialog(this, "Arquivo já importado.");
-                return;
+               b.disconnect();
+               return;
             }
 
             leituraTxt txt = new leituraTxt(selFile);
@@ -124,8 +126,14 @@ public class extrairPDF extends javax.swing.JDialog {
                 if (v.get(i).substring(0,5).equals("02000"))
                     valoracumulado = v.get(i).split("\\|")[1];
                 
-                if (v.get(i).substring(0,5).equals("03000"))
-                   ente = true;
+                if (v.get(i).substring(0,5).equals("03000") ){
+                        if (v.get(i).split("\\|")[3].equals(codMunicipio)){
+                            ente = true;
+                        }else
+                            ente = false;
+                }
+                
+                
                 
                 if (v.get(i).substring(0,5).equals("03100") && ente){
                     if ( filtroISS.contains( v.get(i).split("\\|")[1] ) ){
@@ -134,6 +142,7 @@ public class extrairPDF extends javax.swing.JDialog {
                     if (filtroISSRetido.contains( v.get(i).split("\\|")[1]) ){
                         retido = v.get(i).split("\\|")[2];
                     }
+                    
                 }
                 
                 if (v.get(i).substring(0,5).equals("03110") && aliquota.equals("")){
@@ -146,7 +155,7 @@ public class extrairPDF extends javax.swing.JDialog {
                         //f.execute("INSERT INTO arq-pdgas");
                         f.execute("INSERT INTO PGDAS VALUES (null "
                                 + ",'"+pa+"'"
-                                + ",'"+ razao +"'"
+                                + ",'"+ razao.replace("'", "\'") +"'"
                                 + ",'"+ cnpj +"' "
                                 + ",'"+ valoracumulado.replace(",", ".") +"' "
                                 + ",'"+ semret.replace(",", ".") +"' "
@@ -162,6 +171,8 @@ public class extrairPDF extends javax.swing.JDialog {
                     retido = "";
                     aliquota = "";
                 }
+                
+                
                 
             }
             
@@ -185,6 +196,9 @@ public class extrairPDF extends javax.swing.JDialog {
                 if (reader != null)
                 reader.close();
                 }
+        
+        JOptionPane.showMessageDialog(this, "Pronto, importa o próximo");
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

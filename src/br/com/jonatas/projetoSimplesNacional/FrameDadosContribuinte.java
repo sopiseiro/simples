@@ -86,7 +86,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
 
         try {
             // Criação do FileChooser
-            JFileChooser file = new JFileChooser();
+            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/");
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
@@ -103,6 +103,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             boolean ente = false;
             
             for (int i=0; i<v.size()-1;i++){
+                if (v.get(i).split("\\|")[0].length() >= 13)
                 f.execute("INSERT INTO dadoscontribuinte VALUES (null "
                                 + ",'"+pa+"'" //pa
                                 + ",'"+ v.get(i).split("\\|")[0]+"'"//cnpj
