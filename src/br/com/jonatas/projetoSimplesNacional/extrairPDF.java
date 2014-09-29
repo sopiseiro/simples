@@ -99,7 +99,7 @@ public class extrairPDF extends javax.swing.JDialog {
 
         try {
             // Criação do FileChooser
-            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/09-2014");
+            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/08-2014");
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
@@ -129,6 +129,7 @@ public class extrairPDF extends javax.swing.JDialog {
                 if (v.get(i).substring(0,5).equals("03000") ){
                         if (v.get(i).split("\\|")[3].equals(codMunicipio)){
                             ente = true;
+                            cnpj = v.get(i).split("\\|")[1];
                         }else
                             ente = false;
                 }

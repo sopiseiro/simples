@@ -41,35 +41,35 @@ ORDER BY PGDAS.RAZAO]]>
 					<reportElement x="1" y="2" width="552" height="25" backcolor="#464646" uuid="f51eeef7-f276-436c-891a-f7a9105c96f1"/>
 				</rectangle>
 				<textField>
-					<reportElement x="2" y="3" width="100" height="14" forecolor="#FCF5F5" uuid="3b1b3b42-b708-43e7-a102-021126388a17"/>
+					<reportElement x="2" y="3" width="100" height="12" forecolor="#FCF5F5" uuid="3b1b3b42-b708-43e7-a102-021126388a17"/>
 					<textElement>
-						<font size="8" isBold="true"/>
+						<font size="8" isBold="true" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.000">
-					<reportElement x="455" y="2" width="100" height="14" forecolor="#FCF5F5" uuid="22b00492-ee51-41d3-b245-c81cf2ff2924"/>
+					<reportElement x="455" y="2" width="100" height="12" forecolor="#FCF5F5" uuid="22b00492-ee51-41d3-b245-c81cf2ff2924"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Alíquota:"+$F{aliquota}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="111" y="3" width="340" height="14" forecolor="#FCF5F5" uuid="e65b7de1-8ecd-4fe1-b3f1-374e62c9f761"/>
+					<reportElement x="111" y="3" width="260" height="12" forecolor="#FCF5F5" uuid="e65b7de1-8ecd-4fe1-b3f1-374e62c9f761"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="122" y="16" width="100" height="14" forecolor="#FCF5F5" uuid="94dd872b-f7d6-486b-9a64-0e3d96ff1f8a"/>
+					<reportElement x="122" y="16" width="100" height="12" forecolor="#FCF5F5" uuid="94dd872b-f7d6-486b-9a64-0e3d96ff1f8a"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Sem retenção]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="237" y="15" width="100" height="14" forecolor="#FCF5F5" uuid="02a9e76c-69dc-4657-8f4d-60d0c638e256"/>
+					<reportElement x="237" y="15" width="100" height="12" forecolor="#FCF5F5" uuid="02a9e76c-69dc-4657-8f4d-60d0c638e256"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>

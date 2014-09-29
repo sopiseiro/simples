@@ -69,6 +69,9 @@ public class leituraTxt {
     
     public List leituraTxtPGDAS() throws FileNotFoundException{
         v = new ArrayList();
+        String codMunicipio = "8979";
+        List<String> aux;
+        
         try{
             FileReader fileReader = new FileReader(caminho.toString());
             BufferedReader reader = new BufferedReader(fileReader);
@@ -76,8 +79,34 @@ public class leituraTxt {
             String corte[] = null;
             boolean captura = false;
             //int i=0;
+            aux = new ArrayList<String>();
             while((data = reader.readLine()) != null){
-                if (captura){
+                 aux.add(data);
+                 if (data.substring(0,5).equals("00000")){
+                    if (data.split("\\|")[8].equals("8979")){
+                        //v.add(data);
+                        captura = true;
+                        //System.out.println(data + "Contador: "+i++);
+                    }
+                }
+                 
+                if (data.substring(0,5).equals("03000") ){
+                        if (data.split("\\|")[3].equals(codMunicipio))
+                            captura = true;  
+                } 
+                 
+                if (data.substring(0,5).equals("99999")){
+                    if (captura){
+                        for (int i=0;i<aux.size();i++){
+                            v.add(aux.get(i));
+                        }
+                    }
+                    aux = new ArrayList<String>();
+                    captura = false;
+                }
+                
+            }
+                /*if (captura){
                     v.add(data);
                     //System.out.println(data);
                 }
@@ -94,7 +123,7 @@ public class leituraTxt {
                
             }
             fileReader.close();
-            reader.close();
+            reader.close();*/
             
         }catch(Exception e){
             System.out.println("Deu bosta");
