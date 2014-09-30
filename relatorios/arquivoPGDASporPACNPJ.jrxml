@@ -22,6 +22,8 @@
 	<field name="valdeccomretencao" class="java.lang.Object"/>
 	<field name="valorrecoiss" class="java.lang.Object"/>
 	<field name="aliquota" class="java.lang.Object"/>
+	<field name="data" class="java.lang.Object"/>
+	<field name="operacao" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -75,32 +77,39 @@
 				<text><![CDATA[CNPJ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="352" y="1" width="62" height="20" uuid="f6c49008-9035-4806-a9f6-6a0bb721d67d"/>
+				<reportElement x="385" y="1" width="60" height="20" uuid="f6c49008-9035-4806-a9f6-6a0bb721d67d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Sem retenção]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="2" width="72" height="20" uuid="d2805229-82c1-4893-a370-5e134c695082"/>
+				<reportElement x="451" y="2" width="60" height="20" uuid="d2805229-82c1-4893-a370-5e134c695082"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Com retenção]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="496" y="0" width="58" height="20" uuid="a51e1a9b-bdb5-4587-aced-59d84a4c32b0"/>
+				<reportElement x="513" y="0" width="38" height="20" uuid="a51e1a9b-bdb5-4587-aced-59d84a4c32b0"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Aliquota]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="108" y="1" width="216" height="20" uuid="664c09ab-9387-448d-aaa2-49a0f6c09e37"/>
+				<reportElement x="105" y="0" width="216" height="20" uuid="664c09ab-9387-448d-aaa2-49a0f6c09e37"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Razão Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="2" width="36" height="20" uuid="66cd8cac-26b7-4ca0-9d89-359ed822a03f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Oper.]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -119,32 +128,39 @@
 				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="105" y="2" width="246" height="20" uuid="c6b97a2d-91c1-4646-8c5d-264da8b5cf0e"/>
+				<reportElement x="105" y="2" width="215" height="20" uuid="c6b97a2d-91c1-4646-8c5d-264da8b5cf0e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$F{razao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="354" y="2" width="65" height="20" uuid="ba9881fc-de3d-4752-a121-aa0eeaeddcd8"/>
+				<reportElement x="385" y="2" width="60" height="20" uuid="ba9881fc-de3d-4752-a121-aa0eeaeddcd8"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valdecsemretencao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="420" y="1" width="70" height="20" uuid="8ddd2ff2-6937-455f-8610-08e497e9adec"/>
+				<reportElement x="451" y="0" width="60" height="20" uuid="8ddd2ff2-6937-455f-8610-08e497e9adec"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$F{valdeccomretencao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="496" y="0" width="57" height="20" uuid="473e64f6-f6a9-4ec9-af89-f8564febea6d"/>
+				<reportElement x="513" y="0" width="38" height="20" uuid="473e64f6-f6a9-4ec9-af89-f8564febea6d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$F{aliquota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="2" width="34" height="20" uuid="d529ec74-1a5c-41aa-ba75-82445d98dc00"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{operacao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

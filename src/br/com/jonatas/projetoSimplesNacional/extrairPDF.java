@@ -30,6 +30,8 @@ public class extrairPDF extends javax.swing.JDialog {
     String retido = "";
     String semret = "";
     String aliquota = "";
+    String operacao = "";
+    float fixo, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c22, c23, c24;
     /**
      * Creates new form extrairPDF
      */
@@ -99,7 +101,7 @@ public class extrairPDF extends javax.swing.JDialog {
 
         try {
             // Criação do FileChooser
-            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/08-2014");
+            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/07-2014");
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
@@ -113,14 +115,17 @@ public class extrairPDF extends javax.swing.JDialog {
 
             leituraTxt txt = new leituraTxt(selFile);
             v = txt.leituraTxtPGDAS();
-            boolean captura = false;
+            //txt.imprimir();
+            //boolean captura = false;
             boolean ente = false;
+            boolean gravar = false;
             
-            for (int i=0; i<v.size()-1;i++){
+            for (int i=0; i<v.size();i++){
                 if (v.get(i).substring(0,5).equals("00000")){
                     cnpj  = v.get(i).split("\\|")[6];
                     razao = v.get(i).split("\\|")[7];
                     pa    = v.get(i).split("\\|")[11];
+                    operacao = v.get(i).split("\\|")[15];
                 }
                 
                 if (v.get(i).substring(0,5).equals("02000"))
@@ -137,40 +142,102 @@ public class extrairPDF extends javax.swing.JDialog {
                 
                 
                 if (v.get(i).substring(0,5).equals("03100") && ente){
-                    if ( filtroISS.contains( v.get(i).split("\\|")[1] ) ){
+                    switch (v.get(i).split("\\|")[1]){
+                        case "08":
+                            c8 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "09":
+                            c9 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "10":
+                            c10 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "11":
+                            c11 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "12":
+                            c12 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "13":
+                            c13 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "14":
+                            c14 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "15":
+                            c15 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "16":
+                            c16 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break; 
+                        case "17":
+                            c17 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;  
+                        case "22":
+                            c22 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "23":
+                            c23 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                        case "24":
+                            c24 = Float.parseFloat(v.get(i).split("\\|")[2].replace(",", "."));
+                            gravar = true;
+                            break;
+                         
+                            
+                          
+                        
+                    }
+                    /*if ( filtroISS.contains( v.get(i).split("\\|")[1] ) ){
                         semret = v.get(i).split("\\|")[2];
                     }
                     if (filtroISSRetido.contains( v.get(i).split("\\|")[1]) ){
                         retido = v.get(i).split("\\|")[2];
-                    }
+                    }*/
                     
                 }
-                
+                //System.out.println("aliquota"+aliquota+" - valor c11"+c11+ " - ente"+ente+ "- gravar "+gravar );
                 if (v.get(i).substring(0,5).equals("03110") && aliquota.equals("")){
                      aliquota = v.get(i).split("\\|")[26];
                 }
                
                 
                 if (v.get(i).substring(0,5).equals("99999")){
-                    if (!semret.equals("") && !retido.equals("")){
-                        //f.execute("INSERT INTO arq-pdgas");
+                    if (gravar){
+                        float aux;
+                       
                         f.execute("INSERT INTO PGDAS VALUES (null "
                                 + ",'"+pa+"'"
                                 + ",'"+ razao.replace("'", "\'") +"'"
                                 + ",'"+ cnpj +"' "
                                 + ",'"+ valoracumulado.replace(",", ".") +"' "
-                                + ",'"+ semret.replace(",", ".") +"' "
-                                + ",'"+ retido.replace(",", ".") +"' "
+                                + ",'"+ (c8+c9+c10+c12+c13+c15+c16+c23+c24) +"' "//valor normal
+                                + ",'"+ (c11+c14+c17+c22) +"' "//valor retido
                                 + ",'"+ 0 +"' "
-                                + ",'"+ aliquota.replace(",", ".") +"' "
+                                + ",'"+  getAliquota(Float.parseFloat(pa.replace(",", "."))) +"' "
                                 + ",'"+ selFile.getName().split("-")[4]+"' "
+                                + ",'"+ operacao +"' "
                                  + ")");
                         System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                     }
-                    ente = false;
+                    fixo =c8= c9= c10= c11= c12= c13= c14= c15= c16= c17= c22= c23= c24=0;
+                    ente =gravar= false;
                     semret = "";
                     retido = "";
                     aliquota = "";
+                    
                 }
                 
                 
@@ -198,11 +265,47 @@ public class extrairPDF extends javax.swing.JDialog {
                 reader.close();
                 }
         
-        JOptionPane.showMessageDialog(this, "Pronto, importa o próximo");
+        JOptionPane.showMessageDialog(this, "ok importa o próximo");
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public String getAliquota(float totalPA){
+                    
+        if (totalPA >= 180000.01 && totalPA <= 360000.00){
+            return "2.79";
+        }
+        if (totalPA >= 36000.01 && totalPA <= 540000.00){
+            return "3.50";
+        }
+        if (totalPA >= 540000.01 && totalPA <= 720000.00){
+            return "3.84";
+        }
+        if (totalPA >= 720000.01 && totalPA <= 900000.00){
+            return "3.87";
+        }
+        if (totalPA >= 900000.01 && totalPA <= 1080000.00){
+            return "4.23";
+        }
+        if (totalPA >= 1080000.01 && totalPA <= 1260000.00){
+            return "4.26";
+        }
+        if (totalPA >= 1260000.01 && totalPA <= 1440000.00){
+            return "4.31";
+        }
+        if (totalPA >= 1440000.01 && totalPA <= 1620000.00){
+            return "4.61";
+        }
+        if (totalPA >= 1620000.01 && totalPA <= 1800000.00){
+            return "4.65";
+        }
+        if (totalPA > 1800001.00){
+            return "5.00";
+        }
+        
+        return "2.00";
+    }
+    
     /**
      * @param args the command line arguments
      */

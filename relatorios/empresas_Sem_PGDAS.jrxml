@@ -2,26 +2,31 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empresas_Sem_PGDAS" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc7c400e-b9d2-48b9-8063-36cd12ac0233">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="18"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="PA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT DISTINCT
-	DADOSCONTRIBUINTE.PA, DADOSCONTRIBUINTE.CNPJ
-FROM
-	PGDAS, DADOSCONTRIBUINTE
-WHERE
-	DADOSCONTRIBUINTE.PA = $P{PA} AND
-
-	DADOSCONTRIBUINTE.CNPJ NOT IN (SELECT PGDAS.CNPJ FROM PGDAS WHERE PGDAS.PA = $P{PA})
-
-ORDER BY DADOSCONTRIBUINTE.CNPJ ASC]]>
+		<![CDATA[select distinct cadastroprefeitura.cnpj
+from pgdas, cadastroprefeitura
+where cadastroprefeitura.cnpj not in (select cnpj from pgdas where pa = $P{PA})
+order by cadastroprefeitura.cnpj asc]]>
 	</queryString>
-	<field name="pa" class="java.lang.Object"/>
 	<field name="cnpj" class="java.lang.Object"/>
 	<variable name="pa_1" class="java.lang.Integer" resetType="Column" calculation="Count">
-		<variableExpression><![CDATA[$F{pa}]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="cnpj_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{cnpj}]]></variableExpression>
+	</variable>
+	<variable name="cnpj_2" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{cnpj}]]></variableExpression>
+	</variable>
+	<variable name="cnpj_3" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{cnpj}]]></variableExpression>
+	</variable>
+	<variable name="cnpj_4" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{cnpj}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -30,25 +35,13 @@ ORDER BY DADOSCONTRIBUINTE.CNPJ ASC]]>
 		<band height="79" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="37" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="45" splitType="Stretch">
-			<staticText>
-				<reportElement x="107" y="25" width="100" height="18" uuid="93f3854d-cf9f-476a-ad23-3d93888ad422"/>
-				<text><![CDATA[razao]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="25" width="100" height="20" uuid="324f303c-bf09-4c54-b213-54aae0495597"/>
-				<text><![CDATA[cnpj]]></text>
-			</staticText>
+		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="3" y="2" width="224" height="20" uuid="f5821410-bd94-46f1-90e1-ff0de062d8ba"/>
-				<textFieldExpression><![CDATA["Periodo de apuração:"+$F{pa}]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Column">
-				<reportElement x="307" y="20" width="100" height="20" uuid="eb8f6ec5-1859-4368-898c-935f9baf9a7c"/>
-				<textFieldExpression><![CDATA[$V{pa_1}]]></textFieldExpression>
+				<reportElement x="4" y="5" width="100" height="20" uuid="7116c9f4-c7e2-4942-8ff4-ccba2c6fa834"/>
+				<textFieldExpression><![CDATA[$P{PA}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -66,7 +59,15 @@ ORDER BY DADOSCONTRIBUINTE.CNPJ ASC]]>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
+	<lastPageFooter>
+		<band height="50"/>
+	</lastPageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="352" y="14" width="100" height="20" uuid="1ceeb213-3a1e-42e0-87a4-f1f476df399f"/>
+				<textFieldExpression><![CDATA[$V{cnpj_4}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

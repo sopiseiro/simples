@@ -20,18 +20,16 @@ import utilitarios.mySql;
  *
  * @author issqn
  */
-public class FrameDadosContribuinte extends javax.swing.JDialog {
+public class FrameContribuintesPrefeitura extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrameDadosContribuinte
+     * Creates new form FrameContribuintesPrefeitura
      */
-    public FrameDadosContribuinte(java.awt.Frame parent, boolean modal) {
+    public FrameContribuintesPrefeitura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
-    
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,9 +62,9 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+                .addGap(122, 122, 122)
                 .addComponent(jButton1)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         pack();
@@ -74,9 +72,6 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<String> v = new ArrayList<String>();
-
-        String pa = "201407";//lembrar de add campo para informação
-        String aliquota[]={"2.79","3.50","3.84","3.87","4.23","4.26","4.31","4.61","4.65","5.00"};
 
         
         
@@ -90,12 +85,6 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
-            
-            f.open("SELECT * FROM arqdadoscontribuinte WHERE nome = '"+selFile.getName()+"'");
-            if (f.next()){
-               JOptionPane.showMessageDialog(this, "Arquivo já importado.");
-               return;
-            }
 
             leituraTxt txt = new leituraTxt(selFile);
             v = txt.leituraTxt();
@@ -103,48 +92,29 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             boolean ente = false;
             
             for (int i=0; i<v.size()-1;i++){
-                if (v.get(i).split("\\|")[0].length() >= 13)
-                f.execute("INSERT INTO dadoscontribuinte VALUES (null "
-                                + ",'"+pa+"'" //pa
-                                + ",'"+ v.get(i).split("\\|")[0]+"'"//cnpj
-                                + ",'"+ v.get(i).split("\\|")[2] +"' " //valor retido
-                                + ",'"+ v.get(i).split("\\|")[1] +"' " //valor sem retencao
-          + ",'"+ (v.get(i).split("\\|")[3].equals("null")?"2":aliquota[Integer.parseInt(v.get(i).split("\\|")[3])]) +"' " //aliquota
-                                 + ")");
-                
+                f.open("SELECT * FROM cadastroprefeitura WHERE cnpj = '"+v.get(i)+"'");
+                if (!f.next()){
+                    f.execute("INSERT INTO cadastroprefeitura VALUES ( "
+                             + "'"+v.get(i).replace(".", "").replace("-", "").replace("/", "").replace(" ","")+"'"
+                            + ")");
+                }
+                               
                 //System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                    
                
                 
             }
             
-            System.out.println(selFile.getName());
-            f.execute("INSERT INTO arqdadoscontribuinte VALUES (null, '" + selFile.getName() +"', 0 )");
             b.disconnect();
-            
-          // reader = new PdfReader("" + selFile);
-            // contador para o numeros de paginas
-           /* for (int i = 1; i <= 1; i++) {
-            // Extrai o texto do pdf
-            //String text = PdfTextExtractor.getTextFromPage(reader, i);
 
-           // System.out.println(text);
-            //System.out.println(text);
-            }*/
 
            } catch (IOException e1) {
                 e1.printStackTrace();
                 b.disconnect();
                 //JOptionPane.showMessageDialog(null, "ERRO: " + e1);
             }
-                
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-        
-        
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -162,20 +132,20 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosContribuinte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameContribuintesPrefeitura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosContribuinte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameContribuintesPrefeitura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosContribuinte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameContribuintesPrefeitura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosContribuinte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameContribuintesPrefeitura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrameDadosContribuinte dialog = new FrameDadosContribuinte(new javax.swing.JFrame(), true);
+                FrameContribuintesPrefeitura dialog = new FrameContribuintesPrefeitura(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
