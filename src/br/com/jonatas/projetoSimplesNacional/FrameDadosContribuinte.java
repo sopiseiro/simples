@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.jonatas.projetoSimplesNacional;
 
 import br.com.jonatas.Base.bd;
@@ -29,9 +28,7 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,11 +72,9 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<String> v = new ArrayList<String>();
 
-        String pa = "201407";//lembrar de add campo para informação
-        String aliquota[]={"2.79","3.50","3.84","3.87","4.23","4.26","4.31","4.61","4.65","5.00"};
+        String pa = "201409";//lembrar de add campo para informação
+        String aliquota[] = {"0.00", "2.00", "2.79", "3.50", "3.84", "3.87", "4.23", "4.26", "4.31", "4.61", "4.65", "5.00"};
 
-        
-        
         bd b = new bd();
         b.connect();
         mySql f = new mySql(b.conn);
@@ -90,61 +85,53 @@ public class FrameDadosContribuinte extends javax.swing.JDialog {
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
-            
-            f.open("SELECT * FROM arqdadoscontribuinte WHERE nome = '"+selFile.getName()+"'");
-            if (f.next()){
-               JOptionPane.showMessageDialog(this, "Arquivo já importado.");
-               return;
+
+            f.open("SELECT * FROM arqdadoscontribuinte WHERE nome = '" + selFile.getName() + "'");
+            if (f.next()) {
+                JOptionPane.showMessageDialog(this, "Arquivo já importado.");
+                return;
             }
 
             leituraTxt txt = new leituraTxt(selFile);
             v = txt.leituraTxt();
             boolean captura = false;
             boolean ente = false;
-            
-            for (int i=0; i<v.size()-1;i++){
-                if (v.get(i).split("\\|")[0].length() >= 13)
-                f.execute("INSERT INTO dadoscontribuinte VALUES (null "
-                                + ",'"+pa+"'" //pa
-                                + ",'"+ v.get(i).split("\\|")[0]+"'"//cnpj
-                                + ",'"+ v.get(i).split("\\|")[2] +"' " //valor retido
-                                + ",'"+ v.get(i).split("\\|")[1] +"' " //valor sem retencao
-          + ",'"+ (v.get(i).split("\\|")[3].equals("null")?"2":aliquota[Integer.parseInt(v.get(i).split("\\|")[3])]) +"' " //aliquota
-                                 + ")");
-                
+
+            for (int i = 0; i < v.size() - 1; i++) {
+                if (v.get(i).split("\\|")[0].length() >= 13) {
+                    f.execute("INSERT INTO dadoscontribuinte VALUES (null "
+                            + ",'" + pa + "'" //pa
+                            + ",'" + v.get(i).split("\\|")[0] + "'"//cnpj
+                            + ",'" + v.get(i).split("\\|")[2] + "' " //valor retido
+                            + ",'" + v.get(i).split("\\|")[1] + "' " //valor sem retencao
+                            + ",'" + aliquota[Integer.parseInt(v.get(i).split("\\|")[3])] + "' " //aliquota
+                            + ")");
+                }
+
                 //System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
-                   
-               
-                
             }
-            
+
             System.out.println(selFile.getName());
-            f.execute("INSERT INTO arqdadoscontribuinte VALUES (null, '" + selFile.getName() +"', 0 )");
+            f.execute("INSERT INTO arqdadoscontribuinte VALUES (null, '" + selFile.getName() + "', '0' )");
             b.disconnect();
-            
+
           // reader = new PdfReader("" + selFile);
             // contador para o numeros de paginas
            /* for (int i = 1; i <= 1; i++) {
-            // Extrai o texto do pdf
-            //String text = PdfTextExtractor.getTextFromPage(reader, i);
+             // Extrai o texto do pdf
+             //String text = PdfTextExtractor.getTextFromPage(reader, i);
 
-           // System.out.println(text);
-            //System.out.println(text);
-            }*/
+             // System.out.println(text);
+             //System.out.println(text);
+             }*/
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            b.disconnect();
+            //JOptionPane.showMessageDialog(null, "ERRO: " + e1);
+        }
 
-           } catch (IOException e1) {
-                e1.printStackTrace();
-                b.disconnect();
-                //JOptionPane.showMessageDialog(null, "ERRO: " + e1);
-            }
-                
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-        
-        
-    
-    
     /**
      * @param args the command line arguments
      */

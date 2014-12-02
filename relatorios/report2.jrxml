@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08ee41ae-6cb5-4c67-8ba8-7e114e5b747c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     eventoSimples.`cnpj` AS eventoSimples_cnpj,
+     eventoSimples.`natureza_evento` AS eventoSimples_natureza_evento,
+     eventoSimples.`codigo_evento` AS eventoSimples_codigo_evento,
+     eventoSimples.`data_ocorrencia` AS eventoSimples_data_ocorrencia,
+     tabelaEventosSimples.`nome_evento` AS tabelaEventosSimples_nome_evento,
+     tabelaEventosSimples.`tipo_evento` AS tabelaEventosSimples_tipo_evento
+FROM
+     `tabelaEventosSimples` tabelaEventosSimples INNER JOIN `eventoSimples` eventoSimples ON tabelaEventosSimples.`cod_evento` = eventoSimples.`codigo_evento`]]>
+	</queryString>
+	<field name="eventoSimples_cnpj" class="java.lang.String"/>
+	<field name="eventoSimples_natureza_evento" class="java.lang.String"/>
+	<field name="eventoSimples_codigo_evento" class="java.lang.String"/>
+	<field name="eventoSimples_data_ocorrencia" class="java.lang.String"/>
+	<field name="tabelaEventosSimples_nome_evento" class="java.lang.String"/>
+	<field name="tabelaEventosSimples_tipo_evento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -53,6 +53,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -139,6 +140,14 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem10);
+
+        jMenuItem11.setText("Parcelamento");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem11);
 
         jMenuBar1.add(jMenu3);
 
@@ -246,7 +255,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser("/media/ISSQN/PGDAS/Requisicao de eventos/");
         fc.setDialogTitle("Escolha o arquivo Periodo do SIMEI");
         fc.setDialogType(JFileChooser.OPEN_DIALOG);
         fc.setApproveButtonText("Selecionar");
@@ -275,7 +284,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser("/media/ISSQN/PGDAS/Requisicao de eventos/");
         fc.setDialogTitle("Escolha o arquivo Eventos do Periodo Simples");
         fc.setDialogType(JFileChooser.OPEN_DIALOG);
         fc.setApproveButtonText("Selecionar");
@@ -309,7 +318,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser("/media/ISSQN/PGDAS/Requisicao de eventos/");
         fc.setDialogTitle("Escolha o arquivo Eventos SIMEI");
         fc.setDialogType(JFileChooser.OPEN_DIALOG);
         fc.setApproveButtonText("Selecionar");
@@ -338,7 +347,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         File[] arquivos  = null;
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser("/media/ISSQN/PGDAS/Requisicao de eventos/");
         fc.setDialogTitle("Escolha o arquivo Eventos Simples");
         fc.setDialogType(JFileChooser.OPEN_DIALOG);
         fc.setApproveButtonText("Selecionar");
@@ -382,6 +391,13 @@ public class FramePrincipal extends javax.swing.JFrame {
         j.setTitle("Importação de CNPJ da base Municipal");
         j.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        ImportarParcelamento j = new ImportarParcelamento(this, rootPaneCheckingEnabled);
+        j.setVisible(true);
+        j.setTitle("Importação de Parcelamento");
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,6 +445,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -6,6 +6,7 @@
 
 package br.com.jonatas.projetoSimplesNacional;
 
+import br.com.jonatas.Base.bd;
 import br.com.jonatas.Classes.CalcularDVCNPJ;
 import br.com.jonatas.Classes.Datas;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.awt.Toolkit;
 import javax.swing.JDialog;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import utilitarios.mySql;
 
 /**
  *
@@ -45,6 +47,11 @@ public class FramePeriodoSimples extends javax.swing.JDialog {
     
     public void setTable(){
         DefaultTableModel model = (DefaultTableModel)tabela.getModel();
+        
+        bd b = new bd();
+        b.connect();
+        mySql f = new mySql(b.conn);
+        
         for (int i=0;i<dados.size();i++){
             String aux = dados.get(i).toString();
             CalcularDVCNPJ c = new CalcularDVCNPJ(aux.substring(0,8));
@@ -57,6 +64,14 @@ public class FramePeriodoSimples extends javax.swing.JDialog {
                 aux.substring(24, 25),
                 aux.substring(25, aux.length()),
                     data.getDataZero()==true?"Optante":"Desenquadrado"});
+            
+            f.execute("INSERT INTO periodoSimples VALUES (null "
+                    + ",'" + c.getCNPJCompleto() + "'"
+                    + ",'" + aux.substring(8, 16) + "'"
+                    + ",'" + aux.substring(16, 24) + "' "
+                    + ",'" + aux.substring(24, 25) + "' "
+                    + ",'" + aux.substring(25, aux.length()) + "'"
+                    + ")");
         }
         
         tabela.setModel(model);

@@ -82,7 +82,7 @@ ORDER BY PGDAS.RAZAO]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="82" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band height="20">

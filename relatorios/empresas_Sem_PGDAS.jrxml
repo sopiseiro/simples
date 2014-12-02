@@ -2,14 +2,15 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empresas_Sem_PGDAS" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc7c400e-b9d2-48b9-8063-36cd12ac0233">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="PA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select distinct cadastroprefeitura.cnpj
 from pgdas, cadastroprefeitura
-where cadastroprefeitura.cnpj not in (select cnpj from pgdas where pa = $P{PA})
+where cadastroprefeitura.cnpj in (select distinct dadoscontribuinte.cnpj from dadoscontribuinte where dadoscontribuinte.pa = $P{PA})  AND cadastroprefeitura.cnpj
+not in (select cnpj from pgdas where pa = $P{PA})
 order by cadastroprefeitura.cnpj asc]]>
 	</queryString>
 	<field name="cnpj" class="java.lang.Object"/>
@@ -47,9 +48,9 @@ order by cadastroprefeitura.cnpj asc]]>
 	</columnHeader>
 	<detail>
 		<band height="26" splitType="Stretch">
-			<textField>
+			<textField pattern="00.000.000/0000-00">
 				<reportElement x="4" y="4" width="166" height="20" uuid="b9881ac4-c6f0-4ed1-a4ce-2ba988536994"/>
-				<textFieldExpression><![CDATA[""+$F{cnpj}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""+$F{cnpj}.substring(0,2)+"."+$F{cnpj}.substring(2,5)+"."+$F{cnpj}.substring(5,8)+"/"+$F{cnpj}.substring(8,12)+"-"+$F{cnpj}.substring(12,14)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

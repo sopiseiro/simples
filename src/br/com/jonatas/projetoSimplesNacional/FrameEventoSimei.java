@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.jonatas.projetoSimplesNacional;
 
+import br.com.jonatas.Base.bd;
 import br.com.jonatas.Classes.CalcularDVCNPJ;
 import br.com.jonatas.Classes.Datas;
 import java.awt.Dimension;
@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+import utilitarios.mySql;
 
 /**
  *
@@ -29,14 +30,13 @@ public class FrameEventoSimei extends javax.swing.JDialog {
     /**
      * Creates new form FrameEventoSimples
      */
-    
     public List dados;
     public JFileChooser j;
-    
+
     public FrameEventoSimei(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        for (int i=8;i<14;i++){
+        for (int i = 8; i < 14; i++) {
             tabela.getColumnModel().getColumn(i).setMinWidth(0);
             tabela.getColumnModel().getColumn(i).setMaxWidth(0);
         }
@@ -47,22 +47,26 @@ public class FrameEventoSimei extends javax.swing.JDialog {
         tabela.getColumnModel().getColumn(6).setMaxWidth(0);
     }
 
-     public void setTable(){
-        String natureza[] = {"Medida Judicial","Ato Administrativo","Opção do Contribuinte"};
-        DefaultTableModel model = (DefaultTableModel)tabela.getModel();
-        for (int i=0;i<dados.size();i++){
+    public void setTable() {
+        String natureza[] = {"Medida Judicial", "Ato Administrativo", "Opção do Contribuinte"};
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        bd b = new bd();
+        b.connect();
+        mySql f = new mySql(b.conn);
+
+        for (int i = 0; i < dados.size(); i++) {
             String aux = dados.get(i).toString();
-            CalcularDVCNPJ c = new CalcularDVCNPJ(aux.substring(0,8));
+            CalcularDVCNPJ c = new CalcularDVCNPJ(aux.substring(0, 8));
             Datas data = new Datas();
-            
+
             //System.out.println(c.getCNPJCompleto());
             model.addRow(new Object[]{
                 c.getCNPJCompleto(),
-                natureza[ Integer.parseInt(aux.substring(8  , 9))-1 ],
+                natureza[Integer.parseInt(aux.substring(8, 9)) - 1],
                 aux.substring(9, 12),
                 data.getInvertData(aux.substring(12, 20)),
                 data.getInvertData(aux.substring(20, 28)),
-                aux.substring(28   , 78),
+                aux.substring(28, 78),
                 aux.substring(78, 103),
                 aux.substring(103, 353),//observacoes do usuario
                 aux.substring(353, 360),
@@ -71,24 +75,44 @@ public class FrameEventoSimei extends javax.swing.JDialog {
                 data.getInvertData(aux.substring(366, 374)),
                 data.getHoras(aux.substring(374, 380)),
                 aux.substring(380, 389)
-                //data.getDataZero()==true?"Optante":"Desenquadrado"
+            //data.getDataZero()==true?"Optante":"Desenquadrado"
             });
+
+            f.execute("INSERT INTO eventoSimei VALUES (null "
+                    + ",'" + c.getCNPJCompleto() + "'"
+                    + ",'" + aux.substring(8, 9) + "'"
+                    + ",'" + aux.substring(9, 12) + "' "
+                    + ",'" + aux.substring(12, 20) + "' "
+                    + ",'" + aux.substring(20, 28) + "' "//valor normal
+                    + ",'" + aux.substring(28, 78) + "' "//valor retido
+                    + ",'" + aux.substring(78, 103) + "' "
+                    + ",'" + aux.substring(103, 353) + "' "
+                    + ",'" + aux.substring(353, 360) + "' "
+                    + ",'" + aux.substring(360, 362) + "' "
+                    + ",'" + aux.substring(362, 366) + "' "
+                    + ",'" + aux.substring(366, 374) + "' "
+                    + ",'" + aux.substring(374, 380) + "' "
+                    + ",'" + aux.substring(380, 389) + "' "
+                    + ",'" + aux.substring(389, 398) + "' "
+                    + ")");
+
         }
-        
+
         tabela.setModel(model);
     }
-    
-    public void setDadosVetor(List dados, JFileChooser f){
+
+    public void setDadosVetor(List dados, JFileChooser f) {
         this.dados = dados;
         this.j = j;
         nomeArquivo.setText(f.getSelectedFile().getName());
     }
-    
-    public void print(){
-        for (int i=0;i<dados.size();i++){
+
+    public void print() {
+        for (int i = 0; i < dados.size(); i++) {
             System.out.println(dados.get(i));
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,52 +218,49 @@ public class FrameEventoSimei extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            
-            
-            DefaultTableModel model = (DefaultTableModel)tabela.getModel();
+
+            DefaultTableModel model = (DefaultTableModel) tabela.getModel();
             /*DefaultTableModel model2 =(DefaultTableModel)tabela.getModel();
-            model2.setNumRows(0);
-            System.out.println(tabela.getRowCount());
-            for (int i=0;i<tabela.getRowCount();i++){
-                model2.addRow(new Object[]{
-                    tabela.getValueAt(i, 0),
-                    tabela.getValueAt(i, 1),
-                    tabela.getValueAt(i, 2),
-                    tabela.getValueAt(i, 3),
-                    tabela.getValueAt(i, 4),
-                    tabela.getValueAt(i, 5),
-                    tabela.getValueAt(i, 6),
-                    tabela.getValueAt(i, 7),
-                    tabela.getValueAt(i, 8),
-                    tabela.getValueAt(i, 9),
-                    tabela.getValueAt(i, 10),
-                    tabela.getValueAt(i, 11),
-                    tabela.getValueAt(i, 12),
-                    tabela.getValueAt(i, 13)
-                });
+             model2.setNumRows(0);
+             System.out.println(tabela.getRowCount());
+             for (int i=0;i<tabela.getRowCount();i++){
+             model2.addRow(new Object[]{
+             tabela.getValueAt(i, 0),
+             tabela.getValueAt(i, 1),
+             tabela.getValueAt(i, 2),
+             tabela.getValueAt(i, 3),
+             tabela.getValueAt(i, 4),
+             tabela.getValueAt(i, 5),
+             tabela.getValueAt(i, 6),
+             tabela.getValueAt(i, 7),
+             tabela.getValueAt(i, 8),
+             tabela.getValueAt(i, 9),
+             tabela.getValueAt(i, 10),
+             tabela.getValueAt(i, 11),
+             tabela.getValueAt(i, 12),
+             tabela.getValueAt(i, 13)
+             });
                 
-            }*/
-            
-            
+             }*/
+
             JRTableModelDataSource datasource = new JRTableModelDataSource(model);
             //String report = "";
-            
-            Toolkit toolkit = Toolkit.getDefaultToolkit();    
-            Dimension screenSize = toolkit.getScreenSize(); 
-            
-            
-            JDialog viewer = new JDialog(new javax.swing.JFrame(),"Impressão de Relatório", true);   
-            viewer.setSize(screenSize.width, screenSize.height);  
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = toolkit.getScreenSize();
+
+            JDialog viewer = new JDialog(new javax.swing.JFrame(), "Impressão de Relatório", true);
+            viewer.setSize(screenSize.width, screenSize.height);
             viewer.setLocationRelativeTo(null);
-           
+
             HashMap<String, Object> p = new HashMap<String, Object>();
             p.put("arquivo", nomeArquivo.getText());
             //exibe relatorio
             JasperPrint jp = JasperFillManager.fillReport("relatorios//EventosSimples.jasper", p, datasource);
             JasperViewer jrv = new JasperViewer(jp, false);
-            viewer.getContentPane().add(jrv.getContentPane());   
-            viewer.setVisible(true); 
-                    
+            viewer.getContentPane().add(jrv.getContentPane());
+            viewer.setVisible(true);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

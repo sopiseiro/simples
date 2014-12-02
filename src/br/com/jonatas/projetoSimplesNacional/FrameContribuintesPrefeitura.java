@@ -92,7 +92,7 @@ public class FrameContribuintesPrefeitura extends javax.swing.JDialog {
             boolean ente = false;
             
             for (int i=0; i<v.size()-1;i++){
-                f.open("SELECT * FROM cadastroprefeitura WHERE cnpj = '"+v.get(i)+"'");
+                f.open("SELECT * FROM cadastromunicipal WHERE cnpj = '"+v.get(i).split("\\|")[0]+"'");
                 if (!f.next()){
                     f.execute("INSERT INTO cadastroprefeitura VALUES ( "
                              + "'"+v.get(i).replace(".", "").replace("-", "").replace("/", "").replace(" ","")+"'"

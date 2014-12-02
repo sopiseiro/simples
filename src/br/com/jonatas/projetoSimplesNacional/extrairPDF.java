@@ -101,7 +101,7 @@ public class extrairPDF extends javax.swing.JDialog {
 
         try {
             // Criação do FileChooser
-            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/07-2014");
+            JFileChooser file = new JFileChooser("/media/ISSQN/PGDAS/10-2014");
             // Abre a caixa para escolher a imagem
             file.showOpenDialog(null);
             File selFile = file.getSelectedFile();
@@ -218,7 +218,7 @@ public class extrairPDF extends javax.swing.JDialog {
                     if (gravar){
                         float aux;
                        
-                        f.execute("INSERT INTO PGDAS VALUES (null "
+                        f.execute("INSERT INTO pgdas VALUES (null "
                                 + ",'"+pa+"'"
                                 + ",'"+ razao.replace("'", "\'") +"'"
                                 + ",'"+ cnpj +"' "
@@ -226,9 +226,10 @@ public class extrairPDF extends javax.swing.JDialog {
                                 + ",'"+ (c8+c9+c10+c12+c13+c15+c16+c23+c24) +"' "//valor normal
                                 + ",'"+ (c11+c14+c17+c22) +"' "//valor retido
                                 + ",'"+ 0 +"' "
-                                + ",'"+  getAliquota(Float.parseFloat(pa.replace(",", "."))) +"' "
+                                + ",'"+ getAliquota(Float.parseFloat(valoracumulado.replace(",", "."))) +"' "
                                 + ",'"+ selFile.getName().split("-")[4]+"' "
                                 + ",'"+ operacao +"' "
+                                + ",'0' "
                                  + ")");
                         System.out.println(pa +" - "+cnpj+" - "+ razao +" - "+ valoracumulado+" - "+semret+" - "+retido+" - "+aliquota);
                     }
@@ -275,7 +276,7 @@ public class extrairPDF extends javax.swing.JDialog {
         if (totalPA >= 180000.01 && totalPA <= 360000.00){
             return "2.79";
         }
-        if (totalPA >= 36000.01 && totalPA <= 540000.00){
+        if (totalPA >= 360000.01 && totalPA <= 540000.00){
             return "3.50";
         }
         if (totalPA >= 540000.01 && totalPA <= 720000.00){
